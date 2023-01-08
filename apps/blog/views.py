@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from apps.blog.models import BlogCategory, Article
+from apps.blog.models import BlogCategory, Article,Tag
 
 
 def blog_category_list(request):
