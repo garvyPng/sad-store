@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import ResizeToFill
+
+from apps.user.models import User
 from config.settings import MEDIA_ROOT
 
 class BlogCategory(models.Model):
@@ -54,7 +56,12 @@ class Article(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
-
+    user = models.ForeignKey(
+        to=User,
+        verbose_name = 'Автор',
+        on_delete = models.SET_NULL,
+        null=True
+    )
     tags = models.ManyToManyField(to=Tag, verbose_name='Тэги', blank=True)
     image = ProcessedImageField(
         verbose_name='Изображение',

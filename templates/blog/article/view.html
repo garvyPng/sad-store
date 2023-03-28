@@ -15,4 +15,17 @@
         <b>Дата</b>:{{ article.create_at }} <br>
         <b>Категории</b>:{{ category.name }} <br>
     </p>
+    {%  if article.user %}
+        <div class="text-end">
+        <div class="author">
+            {% if article.user.image %}
+                <span class="avatar">
+                    <img class="img-thumbnail" src="{{ article.user.image.thumbnail.url }}" alt="">
+                </span>
+            {% endif %}
+            <span class="author-name">{{ article.user.first_name }} {{ article.user.last_name }}</span>
+        </div>
+
+        </div>
+    {% endif %}
 {% endblock %}
