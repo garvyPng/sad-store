@@ -84,7 +84,6 @@ class Article(models.Model):
     created_at = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='Дата редактирования',auto_now=True)
 
-
     def image_tag_thumbnail(self):
         if self.image:
             if not self.image_thumbnail:
