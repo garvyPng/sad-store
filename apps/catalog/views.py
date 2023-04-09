@@ -24,3 +24,7 @@ class ProductByCategoryView(generic.ListView):
         context['category'] = self.category
         context['categories'] = self.categories
         return context
+
+class ProductDetailView(generic.DetailView):
+    model = Product
+    template_name = 'catalog/product.html'
