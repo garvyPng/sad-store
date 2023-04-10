@@ -5,10 +5,12 @@ from imagekit.models import ProcessedImageField, ImageSpecField
 from mptt.models import MPTTModel, TreeForeignKey
 from pilkit.processors import ResizeToFill
 from django.urls import reverse
+
+from apps.main.mixins import MetaTagMixin
 from config.settings import MEDIA_ROOT
 
 
-class Category(MPTTModel):
+class Category(MPTTModel, MetaTagMixin):
     name = models.CharField(verbose_name='Название', max_length=255)
     slug = models.SlugField(unique=True)
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
@@ -95,7 +97,7 @@ class Image(models.Model):
     def __str__(self):
         return ''
 
-class Product(models.Model):
+class Product(MetaTagMixin):
     name = models.CharField(verbose_name='Название',max_length=225)
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
     quantity = models.PositiveIntegerField(verbose_name='Количество', default=1)
@@ -129,6 +131,7 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product', kwargs={'pk': self.id})
+
 class ProductCategory(models.Model):
     product = models.ForeignKey(to=Product, verbose_name='Товар', on_delete=models.CASCADE)
     category = models.ForeignKey(to=Category, verbose_name='Категория', on_delete=models.CASCADE)
